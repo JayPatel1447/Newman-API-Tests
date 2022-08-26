@@ -29,11 +29,8 @@ jobs:
         name: "Install newman reporter"
         run: "npm install -g newman-reporter-htmlextra"
       - 
-        name: "Make Directory for results"
-        run: "mkdir -p Postman_Results"
-      - 
         name: "Run tests"
-        run: "newman run Veed.postman_collection.json -e Staging.postman_environment.json  -r htmlextra --reporter-htmlextra-export Postman_Results/htmlreport.html --reporter-htmlextra-darkTheme  > Postman_Results/runreport1.html"
+        run: "newman run Veed.postman_collection.json -e Staging.postman_environment.json  -r htmlextra --reporter-htmlextra-export htmlreport.html --reporter-htmlextra-darkTheme  > runreport1.html"
       
       - name: Publish report
         uses: MeilCli/slack-upload-file@v1
