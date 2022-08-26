@@ -1,0 +1,49 @@
+# This workflow will trigger Postman API tests
+# for staging environment on Chrome browser
+# and publish results inside #internal-qa channel
+name: Postman API Staging Regression Suite
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    environment: staging
+    defaults:
+      run:
+        working-directory: ./tests
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Install nodes
+        run: npm install
+
+      - name: Install newman
+        run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+
+      - name: Make Directory for results
+        run: mkdir -p postmanResults
+
+      - name: Run tests
+         run: |
+          newman run Veed.postman_collection.json -r htmlextra --reporter-htmlextra-export postmanResults/htmlreport.html --reporter-htmlextra-darkTheme  > postmanResults/runreport1.html
+
+      # - name: Publish report
+      #   uses: MeilCli/slack-upload-file@v1
+      #   with:
+      #     slack_token: ${{ secrets.SLACK_PLAYWRIGHT_REPORTER }}
+      #     file_path: './playwright-tests/playwright-report/index.html'
+      #     file_name: 'index.html'
+      #     file_type: 'html'
+      #     channels: 'internal-qa'

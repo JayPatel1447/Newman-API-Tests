@@ -1,0 +1,1 @@
+This is a simple project that extracts the price of a product from an Amazon page using Playwright. On code push to Master, the test will trigger GitHub Actions workflow and execute the test in Ubuntu.
