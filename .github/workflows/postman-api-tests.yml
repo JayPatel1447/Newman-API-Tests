@@ -1,5 +1,6 @@
 name: Playwright Tests
-on: workflow_dispatch:  
+on: 
+  workflow_dispatch:
 jobs: 
   test: 
     defaults: 
@@ -33,6 +34,3 @@ jobs:
       - 
         name: "Run tests"
         run: "newman run Veed.postman_collection.json -r htmlextra --reporter-htmlextra-export postmanResults/htmlreport.html --reporter-htmlextra-darkTheme  > postmanResults/runreport1.html"
-name: "Postman API Staging Regression Suite"
-true: 
-  workflow_dispatch: ~
