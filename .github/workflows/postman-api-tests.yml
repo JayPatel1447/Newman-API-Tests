@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Newman API Tests
 on: 
   workflow_dispatch:
 jobs: 
@@ -16,12 +16,6 @@ jobs:
         uses: actions/setup-node@v2
         with: 
           node-version: "18"
-      - 
-        name: "Install packages"
-        run: "npm ci"
-      - 
-        name: "Install nodes"
-        run: "npm install"
       - 
         name: "Install newman"
         run: "npm install -g newman"
